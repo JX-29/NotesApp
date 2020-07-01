@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NotesApp</title>
+    <link rel="stylesheet" href="css/style.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a0917489ee.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<main class="notes-app">
+    <div class="sidebar">
+        <ul class="sidebar__list">
+            <li class="note note_active"><span class="note__mark"><i class="fas fa-bars"></i></span><span class="note__name">All notes</span></li>
+            <li class="sidebar__note-wrapper">
+            </li>
+            <li class="sidebar__add "><span class="note__mark note__mark_plus"><i class="fas fa-plus"></i></span><span class="note__name">Add note</span></li>
+        </ul>
+    </div>
+    <div class="notes-details">
+        <div class="notes-details__blank">
+            You have no notes
+        </div>
+    </div>
+    <form class="popup">
+        <input type="text" class="popup__input" placeholder="Note name">
+        <div class="popup__colors">
+            <div class="popup__color-round popup__color-round_blue"></div>
+            <div class="popup__color-round popup__color-round_darkblue"></div>
+            <div class="popup__color-round popup__color-round_lightgreen"></div>
+            <div class="popup__color-round popup__color-round_orange"></div>
+            <div class="popup__color-round popup__color-round_pink"></div>
+            <div class="popup__color-round popup__color-round_red"></div>
+            <div class="popup__color-round popup__color-round_violate"></div>
+            <div class="popup__color-round popup__color-round_yellow"></div>
+        </div>
+        <button type="submit" class="popup__button">Add</button>
+        <div class="popup__cross"><i class="fas fa-times"></i></div>
+    </form>
+</main>
+<script src="JS/popup.js"></script>
+<script src="JS/note.js"></script>
+</body>
+
+</html>
+

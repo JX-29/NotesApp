@@ -1,0 +1,104 @@
+.popup {
+  display: none;
+  width: 260px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+  border: 1px solid #f1f1f1;
+  position: fixed;
+  z-index: 2;
+  bottom: 30px;
+  left: 40px;
+  padding: 20px;
+  background-color: $white;
+  border-radius: 14px;
+
+  &_active {
+    display: block;
+  }
+
+  &__input {
+    font-weight: 300;
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #f1f1f1;
+    border-radius: 7px;
+    font-size: 18px;
+    margin-bottom: 12px;
+
+  }
+  &__colors {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  &__color-round {
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    &:hover {
+      border: 2px solid $black;
+    }
+    &_orange {
+      background-color: $orange;
+    }
+    &_yellow {
+      background-color: $yellow;
+    }
+    &_red {
+      background-color: $red;
+    }
+    &_blue {
+      background-color: $blue;
+    }
+    &_violate {
+      background-color: $violate;
+    }
+    &_darkblue {
+      background-color: $darkblue;
+    }
+    &_lightgreen {
+      background-color: $lightgreen;
+    }
+    &_pink {
+      background-color: $pink;
+    }
+  }
+  &__cross {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #808080;
+    width: 30px;
+    height: 30px;
+    color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    transform: translate(10px, -50%);
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+      background-color: $black;
+    }
+  }
+  &__button {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 7px;
+    background-color: rgb(100, 196, 237);
+    color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+      background-color: rgb(69, 170, 215);
+    }
+  }
+
+
+}

@@ -1,0 +1,34 @@
+.sidebar {
+  height: 100%;
+  padding: 40px;
+  height: 100%;
+  background-color: $gray;
+  border-right: 1px solid #f1f1f1;
+  &__note-wrapper {
+    margin-top: 15px;
+    margin-bottom: 35px;
+  }
+  &__add {
+    font-weight: 300;
+    cursor: pointer;
+    width: 200px;
+    padding: 12px 25px 12px 15px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #8b8b8b;
+    border-radius: 7px;
+    position: relative;
+    transition: 0.4s;
+
+    &_active {
+      color: $black;
+    }
+
+    &:hover {
+      background-color: $gray;
+      color: $black;
+    }
+  }
+}
