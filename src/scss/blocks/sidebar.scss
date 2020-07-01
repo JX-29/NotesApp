@@ -3,7 +3,7 @@
   padding: 40px;
   height: 100%;
   background-color: $gray;
-  border-right: 1px solid #f1f1f1;
+  border-right: 1px solid $lightgray;
   &__note-wrapper {
     margin-top: 15px;
     margin-bottom: 35px;
@@ -17,7 +17,7 @@
     display: flex;
     align-items: center;
     font-size: 18px;
-    color: #8b8b8b;
+    color: $darkgrey;
     border-radius: 7px;
     position: relative;
     transition: 0.4s;
@@ -27,7 +27,6 @@
     }
 
     &:hover {
-      background-color: $gray;
       color: $black;
     }
   }

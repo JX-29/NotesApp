@@ -15,27 +15,47 @@
     <div class="sidebar">
         <ul class="sidebar__list">
             <li class="note note_active"><span class="note__mark"><i class="fas fa-bars"></i></span><span class="note__name">All notes</span></li>
-            <li class="sidebar__note-wrapper">
-            </li>
+            <ul class="sidebar__note-wrapper">
+            </ul>
             <li class="sidebar__add "><span class="note__mark note__mark_plus"><i class="fas fa-plus"></i></span><span class="note__name">Add note</span></li>
         </ul>
     </div>
     <div class="notes-details">
-        <div class="notes-details__blank">
+        <div class="notes-details__blank ">
             You have no notes
         </div>
+        <div class="notes-details__title-wrapper">
+            <h2 class="notes-details__title">Tutorial</h2>
+            <div class="notes-details__edit-title"><i class="fas fa-pen"></i></div>
+        </div>
+        <ul class="notes-details__list">
+            <ul class="notes-details__items">
+                <li class="detail"><input type="checkbox" class="detail__input">
+                    <div class="detail__content">Click on "add note" to create empty note</div>
+                    <div class="detail__edit"><i class="fas fa-pen"></i></div>
+                    <div class="detail__remove"><i class="fas fa-times"></i></div>
+                </li>
+                <li class="detail"><input type="checkbox" class="detail__input">
+                    <div class="detail__content">Enter a name and select a color for the note</div>
+                    <div class="detail__edit"><i class="fas fa-pen"></i></div>
+                    <div class="detail__remove"><i class="fas fa-times"></i></div>
+                </li>
+            </ul>
+            <li class="sidebar__add "><span class="note__mark note__mark_plus"><i class="fas fa-plus"></i></span><span class="note__name">New detail</span></li>
+        </ul>
+
     </div>
     <form class="popup">
         <input type="text" class="popup__input" placeholder="Note name">
         <div class="popup__colors">
-            <div class="popup__color-round popup__color-round_blue"></div>
-            <div class="popup__color-round popup__color-round_darkblue"></div>
-            <div class="popup__color-round popup__color-round_lightgreen"></div>
-            <div class="popup__color-round popup__color-round_orange"></div>
-            <div class="popup__color-round popup__color-round_pink"></div>
-            <div class="popup__color-round popup__color-round_red"></div>
-            <div class="popup__color-round popup__color-round_violate"></div>
-            <div class="popup__color-round popup__color-round_yellow"></div>
+            <div class="popup__color-round popup__color-round_blue" id="blue"></div>
+            <div class="popup__color-round popup__color-round_darkblue" id="darkblue"></div>
+            <div class="popup__color-round popup__color-round_lightgreen" id="lightgreen"></div>
+            <div class="popup__color-round popup__color-round_orange" id="orange"></div>
+            <div class="popup__color-round popup__color-round_pink" id="pink"></div>
+            <div class="popup__color-round popup__color-round_red" id="red"></div>
+            <div class="popup__color-round popup__color-round_violate" id="violate"></div>
+            <div class="popup__color-round popup__color-round_yellow" id="yellow"></div>
         </div>
         <button type="submit" class="popup__button">Add</button>
         <div class="popup__cross"><i class="fas fa-times"></i></div>
