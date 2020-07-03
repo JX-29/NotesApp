@@ -14,7 +14,6 @@
 <main class="notes-app">
     <div class="sidebar">
         <ul class="sidebar__list">
-            <li class="note note_active"><span class="note__mark"><i class="fas fa-bars"></i></span><span class="note__name">All notes</span></li>
             <ul class="sidebar__note-wrapper">
             </ul>
             <li class="sidebar__add "><span class="note__mark note__mark_plus"><i class="fas fa-plus"></i></span><span class="note__name">Add note</span></li>
@@ -24,38 +23,38 @@
         <div class="notes-details__blank ">
             You have no notes
         </div>
-        <div class="notes-details__title-wrapper">
-            <h2 class="notes-details__title">Tutorial</h2>
+        <div class="notes-details__title-edit-wrapper">
+            <div class="notes-details__title-wrapper">
+            </div>
             <div class="notes-details__edit-title"><i class="fas fa-pen"></i></div>
         </div>
+        <form class="notes-details__title-input-wrapper  notes-details__title-input-wrapper_inactive">
+            <input type="text" class="notes-details__input" placeholder="New note name">
+            <button class="notes-details__save" type="submit">Save changes</button>
+            <div class="notes-details__cancel">Cancel</div>
+        </form>
         <ul class="notes-details__list">
             <ul class="notes-details__items">
-                <li class="detail"><input type="checkbox" class="detail__input">
-                    <div class="detail__content">Click on "add note" to create empty note</div>
-                    <div class="detail__edit"><i class="fas fa-pen"></i></div>
-                    <div class="detail__remove"><i class="fas fa-times"></i></div>
-                </li>
-                <li class="detail"><input type="checkbox" class="detail__input">
-                    <div class="detail__content">Enter a name and select a color for the note</div>
-                    <div class="detail__edit"><i class="fas fa-pen"></i></div>
-                    <div class="detail__remove"><i class="fas fa-times"></i></div>
-                </li>
             </ul>
-            <li class="sidebar__add "><span class="note__mark note__mark_plus"><i class="fas fa-plus"></i></span><span class="note__name">New detail</span></li>
+            <li class="notes-details__add notes-details__add_active"><span class="note__mark note__mark_plus"><i class="fas fa-plus"></i></span><span class="note__name">New detail</span></li>
+            <form class="notes-details__add-wrapper">
+                <input type="text" class="notes-details__input-detail" placeholder="New note name">
+                <button class="notes-details__save-detail" type="submit">Save changes</button>
+                <div class="notes-details__cancel-detail">Cancel</div>
+            </form>
         </ul>
-
     </div>
     <form class="popup">
         <input type="text" class="popup__input" placeholder="Note name">
         <div class="popup__colors">
-            <div class="popup__color-round popup__color-round_blue" id="blue"></div>
-            <div class="popup__color-round popup__color-round_darkblue" id="darkblue"></div>
-            <div class="popup__color-round popup__color-round_lightgreen" id="lightgreen"></div>
-            <div class="popup__color-round popup__color-round_orange" id="orange"></div>
-            <div class="popup__color-round popup__color-round_pink" id="pink"></div>
-            <div class="popup__color-round popup__color-round_red" id="red"></div>
-            <div class="popup__color-round popup__color-round_violate" id="violate"></div>
-            <div class="popup__color-round popup__color-round_yellow" id="yellow"></div>
+            <div class="popup__color-round popup__color-round_blue" onclick="selectColor(event)" id="blue"></div>
+            <div class="popup__color-round popup__color-round_darkblue" onclick="selectColor(event)" id="darkblue"></div>
+            <div class="popup__color-round popup__color-round_lightgreen" onclick="selectColor(event)" id="lightgreen"></div>
+            <div class="popup__color-round popup__color-round_orange" onclick="selectColor(event)" id="orange"></div>
+            <div class="popup__color-round popup__color-round_pink" onclick="selectColor(event)" id="pink"></div>
+            <div class="popup__color-round popup__color-round_red" onclick="selectColor(event)" id="red"></div>
+            <div class="popup__color-round popup__color-round_violate" onclick="selectColor(event)" id="violate"></div>
+            <div class="popup__color-round popup__color-round_yellow" onclick="selectColor(event)" id="yellow"></div>
         </div>
         <button type="submit" class="popup__button">Add</button>
         <div class="popup__cross"><i class="fas fa-times"></i></div>

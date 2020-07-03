@@ -37,7 +37,7 @@
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    &:hover {
+    &_active {
       border: 2px solid $black;
     }
     &_orange {
@@ -85,10 +85,11 @@
     }
   }
   &__button {
+    font-weight: 500;
     width: 100%;
     padding: 8px 10px;
     border-radius: 7px;
-    background-color: rgb(100, 196, 237);
+    background-color: #64c4ed;
     color: $white;
     display: flex;
     justify-content: center;

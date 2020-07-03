@@ -9,7 +9,7 @@
     margin-bottom: 35px;
   }
   &__add {
-    font-weight: 300;
+    font-weight: 500;
     cursor: pointer;
     width: 200px;
     padding: 12px 25px 12px 15px;
@@ -21,11 +21,9 @@
     border-radius: 7px;
     position: relative;
     transition: 0.4s;
-
     &_active {
       color: $black;
     }
-
     &:hover {
       color: $black;
     }

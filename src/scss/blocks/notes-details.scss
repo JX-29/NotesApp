@@ -11,18 +11,63 @@
     justify-content: center;
     align-items: center;
   }
-  &__title-wrapper {
+  &__title-edit-wrapper {
     display: flex;
     flex-direction: row;
     padding-bottom: 20px;
     margin-bottom: 30px;
     border-bottom: 1px solid $lightgray;
     width: 100%;
+    &_inactive {
+      display: none;
+    }
+  }
+  &__title-input-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid $lightgray;
+    width: 100%;
+    &_inactive {
+      display: none;
+    }
   }
   &__title {
     color: $red;
     font-size: 28px;
     font-weight: 700;
+    &_pink {
+      color: $pink;
+    }
+
+    &_darkblue {
+      color: $darkblue;
+    }
+
+    &_lightgreen {
+      color: $lightgreen;
+    }
+
+    &_violate {
+      color: $violate;
+    }
+
+    &_blue {
+      color: $blue;
+    }
+
+    &_red {
+      color: $red;
+    }
+
+    &_yellow {
+      color: $yellow;
+    }
+
+    &_orange {
+      color: $orange;
+    }
   }
   &__edit-title {
     color: $darkgrey;
@@ -31,11 +76,135 @@
     padding: 7px;
     margin-left: 10px;
     transition: 0.3s;
+
     &:hover {
       color: $black;
     }
   }
+  &__input {
+    font-size: 16px;
+    font-weight: 300;
+    width: 180px;
+    border: 1px solid $lightgray;
+    border-radius: 3px;
+    padding: 8px 10px;
+    margin-right: 12px;
+  }
+  &__save {
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    padding: 0 15px;
+    color: $white;
+    background-color: $blue;
+    margin-right: 12px;
+    transition: 0.4s;
+    &:hover {
+      background-color: rgb(69, 170, 215);
+    }
+  }
+  &__cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    padding: 0 15px;
+    color: $black;
+    background-color: $gray;
+    margin-right: 12px;
+    transition: 0.4s;
+    &:hover {
+      background-color: $lightgray;
+    }
+  }
   &__items {
     margin-bottom: 20px;
+  }
+  &__add-wrapper {
+    display: none;
+    flex-direction: row;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+    &_active {
+      display: flex;
+    }
+  }
+  &__add {
+    font-weight: 500;
+    cursor: pointer;
+    width: 200px;
+    padding: 12px 25px 12px 15px;
+    margin-bottom: 5px;
+    display: none;
+    align-items: center;
+    font-size: 18px;
+    color: $darkgrey;
+    border-radius: 7px;
+    position: relative;
+    transition: 0.4s;
+    &_active {
+      display: flex;
+    }
+    &:hover {
+      color: $black;
+    }
+  }
+  &__input-detail {
+    font-size: 16px;
+    font-weight: 300;
+    width: 180px;
+    border: 1px solid $lightgray;
+    border-radius: 3px;
+    padding: 8px 10px;
+    margin-right: 12px;
+  }
+  &__save-detail {
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    padding: 0 15px;
+    color: $white;
+    background-color: $blue;
+    margin-right: 12px;
+    transition: 0.4s;
+    &:hover {
+      background-color: rgb(69, 170, 215);
+    }
+  }
+  &__cancel-detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    padding: 0 15px;
+    color: $black;
+    background-color: $gray;
+    margin-right: 12px;
+    transition: 0.4s;
+    &:hover {
+      background-color: $lightgray;
+    }
+  }
+  &__items {
+    margin-bottom: 20px;
+  }
+  &__add-wrapper {
+    display: none;
+    flex-direction: row;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+    &_active {
+      display: flex;
+    }
   }
 }
