@@ -9,6 +9,8 @@
     const popup = document.querySelector('.popup'); // Всплывающее окно
     const colors = document.querySelector('.popup__colors'); //массив с цветными кругами во всплывающем окне
 
+    const detailsBlank = document.querySelector('.notes-details__blank'); // пустая страница с записями (выводится если заметок нет или заметка не выбрана)
+    const detailsFilled = document.querySelector('.notes-details__filled'); // пустая страница с записями (выводится если заметок нет или заметка не выбрана)
     const title = document.querySelector('.notes-details__title-wrapper') // Обертка с названием заметки и кнопкой редактирования
     const details = document.querySelector('.notes-details__items'); // запись в заметке
     const detailsAddBtn = document.querySelector('.notes-details__add'); // кнопка добавления новой записи
@@ -114,54 +116,51 @@
         })
     }
 
-    function createNotesDetailsPage(notes) {
-        title.innerHTML = ``
-        details.innerHTML = ``
-        notes.forEach((item) => {
-            if (item.id == currentNoteId){ // поиск нужного объекта по id
-                new createNoteTitle(
-                    item.name ,
-                    item.color
-                ).render();
-            }
-        })
-        notes.forEach((item, i) => {
-            if (item.id == currentNoteId){ // поиск нужного объекта по id
-                if (item.details !== undefined) {
-                    item.details.forEach((item, i) => { // получение деталей заметки из объекта
-                        item.id =  i + 'D' //одинаковых индексов быть не может, поэтому для записей создается индекс с приставко D
-                        new createNoteDetails(
-                            item.detailText,
-                            item.id
-                        ).render();
-                    })
+    //генерация страницы с названием заметки и ее записями
+    function createNotesDetailsPage(notes, event) {
+        //выполняется при клике на любой участок заметки, кроме креста
+            //скрытие пустого листа заметок, отображение страницы, на которую будут выведены данные заметки
+            detailsBlank.classList.remove('notes-details__blank_active');
+            detailsFilled.classList.add('notes-details__filled_active');
+            //обнуление листа заметок и записей
+            title.innerHTML = ``
+            details.innerHTML = ``
+            notes.forEach((item) => {
+                if (item.id == currentNoteId) { // поиск нужного объекта по id
+                    new createNoteTitle(
+                        item.name,
+                        item.color
+                    ).render();
                 }
-            }
-        })
+            })
+            notes.forEach((item, i) => {
+                if (item.id == currentNoteId) { // поиск нужного объекта по id
+                    if (item.details !== undefined) {
+                        item.details.forEach((item, i) => { // получение деталей заметки из объекта
+                            item.id = i + 'D' //одинаковых индексов быть не может, поэтому для записей создается индекс с приставко D
+                            new createNoteDetails(
+                                item.detailText,
+                                item.id
+                            ).render();
+                        })
+                    }
+                }
+            })
     }
 
     // удаление заметки из массива и списка. Использует id элемента чтобы найти и удалить его в массиве
     function removeNote(event) {
-        if (event.target.parentNode.classList != 'note__cross') {
-            return;
-        }
-        else {
+        //если клик произошел на кресте заметки
+        if (event.target.parentNode.classList == 'note__cross')  {
+            // переменная тела заметки
             const currentNote = event.target.parentNode.parentNode;
-            const nextNoteId = +currentNote.id + 1
-            // console.log('current note is ' + currentNote.id)
-            // console.log('next note is ' + nextNoteId)
-            list.removeChild(currentNote);
+            //удаление заметки, на которой был произведен клик, из массива (id элемента заметки соответствует id в массиве)
             notes.splice(currentNote.id, 1)
-
-            const nextNote = [notes.find((item, i, arr) => {
-                console.log('current note is ' + item.id)
-                console.log('next note is ' + nextNoteId)
-                if (item.id == nextNoteId) {
-                    console.log(item)
-                    return item;
-                }
-            })];
-            // console.log(nextNote)
+            // перерисовка списка заметок с учетом удаленной заметки (id так же обновляются)
+            createNotes(notes)
+            //отображение пустой страницы записей заметок до тех пор, пока пользователь не выберет новую заметку
+            detailsBlank.classList.add('notes-details__blank_active');
+            detailsFilled.classList.remove('notes-details__filled_active');
         }
     };
 
@@ -179,19 +178,6 @@
         }
     };
 
-    function selectNextNote(NextNote) {
-    const currentNote = event.target.closest('.note');
-    list.childNodes.forEach((note, i) => {
-        if (note.id !== undefined) {
-            note.classList.remove('note_active')
-        }
-    })
-    if (currentNote) {
-        currentNoteId = currentNote.id;
-        currentNote.classList.add('note_active')
-    }
-};
-
     //удаление записи из массива и списка
     function removeDetail(event) {
     if (event.target.parentNode.classList != 'detail__remove') {
@@ -205,7 +191,6 @@
                 const currentNote = note;
                 currentNote.details.forEach((detail,i) => {
                     let trueDetailId = currentDetail.id.replace(/D/g, ''); //расшифровка id. Соответствует номеру записи в массиве
-                    console.log(trueDetailId)
                     currentNote.details.splice(trueDetailId.id, 1)
                 })
             }
@@ -214,7 +199,8 @@
     }
 };
 
-    function toggleTitleEditVisibility() { // скрытие названия, появление окна редактирования названия и наоборот
+    // скрытие названия, появление окна редактирования названия и наоборот
+    function toggleTitleEditVisibility() {
         editTitleWrapper.classList.toggle('notes-details__title-edit-wrapper_inactive');
         inputTitleWrapper.classList.toggle('notes-details__title-input-wrapper_inactive');
         notes.forEach((note) => {
@@ -225,12 +211,13 @@
         })
     };
 
-    function toggleAddVisibility() { // скрытие кнопки добавления записи, появление окна редактирования записи и наоборот
+    // скрытие кнопки добавления записи, появление окна редактирования записи и наоборот
+    function toggleAddVisibility() {
         addDetailForm.classList.toggle('notes-details__add-wrapper_active');
         detailsAddBtn.classList.toggle('notes-details__add_active');
     };
 
-
+    // функция создания заметки с выбранным цветом и именем
     function addNote(event) {
         event.preventDefault()
         if (inputPopup.value === '') return alert('Необходимо ввести название заметки'); // проверка на наличие названия
@@ -242,13 +229,13 @@
         inputPopup.value = ''; //сброс информации после добавления заметки
     }
 
+    // функция добавления новой записи в выбранную заметку
     function addDetail(event) {
         event.preventDefault()
         if (inputDetail.value === '') return false; // проверка на наличие названия
         const currentEnteredDetail = inputDetail.value;
         notes.forEach((note, i) => {
             if (note.id == currentNoteId) {
-                console.log(i)
                 currentNoteDetails = note.details
                 currentNoteDetails.push({checked: false, detailText: currentEnteredDetail, id: 0})
             }
@@ -258,6 +245,7 @@
         inputDetail.value = ''; //сброс информации после добавления заметки
     }
 
+    //функция смены имени заметки (после клика на кнопку карандаша рядом с заголовком)
     function changeName(event) {
         event.preventDefault()
         if (inputTitle.value === '') return false; // проверка на наличие названия
@@ -268,16 +256,14 @@
             }
         })
         createNotes(notes)
-        createNotesDetailsPage(notes)
+        createNotesDetailsPage(notes) //исправить здесь.
         inputTitle.value = ''; //сброс информации после добавления заметки
         toggleTitleEditVisibility()
     }
 
     createNotes(notes); //создание списка заметок из изначальной информации в массиве
-    createNotesDetailsPage(notes);
 
-    //временный костыль, пока не разберусь как повесить события на элементы с помощью цикла
-
+    //выбор цвета. Круг с цветом во всплывающем окне выделяется черным цветом и его id (соответствующий цвету) заносится в глобальную перерменную selectedColor, после чего заметки создаются с этим цветом
     function selectColor(event) {
         colors.childNodes.forEach((color, i) => {
             if (color.classList !== undefined) {
@@ -290,7 +276,12 @@
 
     list.addEventListener('click', removeNote); //удаление заметок из массива и списка по клику
     list.addEventListener('click', selectNote); //пометка выбранной заметки
-    list.addEventListener('click', () => createNotesDetailsPage(notes)); //открытие информации о выбранной заметке на главном экране
+    list.addEventListener('click', (event) => {
+        //если клик происходит не по кресту
+        if (event.target.parentNode.classList != 'note__cross') {
+            createNotesDetailsPage(notes)
+        }
+    }); //открытие информации о выбранной заметке на главном экране
     details.addEventListener('click', removeDetail)
 
     detailsAddBtn.addEventListener('click', toggleAddVisibility) // вызов формы редактирования названия заметки
@@ -301,9 +292,9 @@
     cancelTitleBtn.addEventListener('click', toggleTitleEditVisibility) // отмена создания новой записи
 
     // ввод новой заметки во всплывающем оке
-    popup.addEventListener('submit', () => addNote(event));
-    addDetailForm.addEventListener('submit', () => addDetail(event));
-    editTitleForm.addEventListener('submit', () => changeName(event));
+    popup.addEventListener('submit', (event) => addNote(event));
+    addDetailForm.addEventListener('submit', (event) => addDetail(event));
+    editTitleForm.addEventListener('submit', (event) => changeName(event));
 
 
 
