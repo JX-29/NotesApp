@@ -1,11 +1,11 @@
 .sidebar {
-  height: 100%;
+  transition: 0.4s;
+  z-index: 2;
+  min-height: 100%;
   padding: 40px;
-  height: 100%;
   background-color: $gray;
   border-right: 1px solid $lightgray;
   &__note-wrapper {
-    margin-top: 15px;
     margin-bottom: 35px;
   }
   &__add {
@@ -28,4 +28,5 @@
       color: $black;
     }
   }
+
 }

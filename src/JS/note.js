@@ -27,7 +27,7 @@
 
     let selectedColor; // выбранный на текущий момент цвет (из списка цветных кругов во всплывающем окне)
     let currentNoteId = 0; // Id текущей заметки, отображаемой на главном экране и выделенной в боковом меню. По умолчанию вызывается заметка Tutorial
-    let currentNoteDetails;
+    let currentNoteDetails; // текущая
 
     //в этом массиве хранится объекты с информацией о заметках
     let noteList = {
@@ -54,9 +54,6 @@
             this.id = id;
             this.Active = Active;
         }
-        if (name) {
-
-        }
         render() {
             list.innerHTML += `
                 <li class="note ${this.Active}" id="${this.id}"><span class="note__mark ${this.color}">
@@ -66,6 +63,7 @@
         }
     }
 
+    //класс, генерирующий заголовок из массива и окрашивающий его в выбранный цвет
     class createNoteTitle {
 
         constructor(name, color) {
@@ -120,7 +118,6 @@
         title.innerHTML = ``
         details.innerHTML = ``
         notes.forEach((item) => {
-
             if (item.id == currentNoteId){ // поиск нужного объекта по id
                 new createNoteTitle(
                     item.name ,
@@ -143,7 +140,6 @@
         })
     }
 
-
     // удаление заметки из массива и списка. Использует id элемента чтобы найти и удалить его в массиве
     function removeNote(event) {
         if (event.target.parentNode.classList != 'note__cross') {
@@ -151,11 +147,25 @@
         }
         else {
             const currentNote = event.target.parentNode.parentNode;
+            const nextNoteId = +currentNote.id + 1
+            // console.log('current note is ' + currentNote.id)
+            // console.log('next note is ' + nextNoteId)
             list.removeChild(currentNote);
             notes.splice(currentNote.id, 1)
+
+            const nextNote = [notes.find((item, i, arr) => {
+                console.log('current note is ' + item.id)
+                console.log('next note is ' + nextNoteId)
+                if (item.id == nextNoteId) {
+                    console.log(item)
+                    return item;
+                }
+            })];
+            // console.log(nextNote)
         }
     };
 
+    //выбор заметки, ее выделение, вывод на экран информации о ней
     function selectNote(event) {
         const currentNote = event.target.closest('.note');
         list.childNodes.forEach((note, i) => {
@@ -169,48 +179,40 @@
         }
     };
 
+    function selectNextNote(NextNote) {
+    const currentNote = event.target.closest('.note');
+    list.childNodes.forEach((note, i) => {
+        if (note.id !== undefined) {
+            note.classList.remove('note_active')
+        }
+    })
+    if (currentNote) {
+        currentNoteId = currentNote.id;
+        currentNote.classList.add('note_active')
+    }
+};
+
+    //удаление записи из массива и списка
     function removeDetail(event) {
-        if (event.target.parentNode.classList != 'detail__remove') {
-            return;
-        }
-        else {
-            const currentDetail = event.target.parentNode.parentNode;
-            details.removeChild(currentDetail);
-            notes.forEach((item, i) => {
-                if (item.id == currentNoteId){ // поиск нужного объекта по id
-                    if (item.details !== undefined) {
-                        item.details.forEach((item, i) => { // получение деталей заметки из объекта
-                            let trueDetailId = item.id.replace(/D/g, '');
-                            notes.splice(trueDetailId.id, 1)
-                        })
-                    }
-                }
-            })
+    if (event.target.parentNode.classList != 'detail__remove') {
+        return;
+    }
+    else {
+        const currentDetail = event.target.parentNode.parentNode;
+        details.removeChild(currentDetail);
+        notes.forEach((note, i) => {
+            if (note.id == currentNoteId){ // поиск нужного объекта по id
+                const currentNote = note;
+                currentNote.details.forEach((detail,i) => {
+                    let trueDetailId = currentDetail.id.replace(/D/g, ''); //расшифровка id. Соответствует номеру записи в массиве
+                    console.log(trueDetailId)
+                    currentNote.details.splice(trueDetailId.id, 1)
+                })
+            }
+        })
 
-        }
-    };
-
-    // function editDetail(event) {
-    //     if (event.target.parentNode.classList != 'detail__edit') {
-    //         return;
-    //     }
-    //     else {
-    //         const currentDetail = event.target.parentNode.parentNode;
-    //         details.removeChild(currentDetail);
-    //         notes.forEach((item, i) => {
-    //             if (item.id == currentNoteId){ // поиск нужного объекта по id
-    //                 if (item.details !== undefined) {
-    //                     item.details.forEach((item, i) => { // получение деталей заметки из объекта
-    //                         let trueDetailId = item.id.replace(/D/g, '');
-    //                         console.log(trueDetailId)
-    //                         item.text =
-    //                     })
-    //                 }
-    //             }
-    //         })
-    //
-    //     }
-    // };
+    }
+};
 
     function toggleTitleEditVisibility() { // скрытие названия, появление окна редактирования названия и наоборот
         editTitleWrapper.classList.toggle('notes-details__title-edit-wrapper_inactive');
@@ -228,6 +230,7 @@
         detailsAddBtn.classList.toggle('notes-details__add_active');
     };
 
+
     function addNote(event) {
         event.preventDefault()
         if (inputPopup.value === '') return alert('Необходимо ввести название заметки'); // проверка на наличие названия
@@ -237,8 +240,6 @@
         notes.push({Active: false, color: currentColor, name: currentName, details: []})
         createNotes(notes)
         inputPopup.value = ''; //сброс информации после добавления заметки
-        selectedColor = undefined;
-
     }
 
     function addDetail(event) {
