@@ -28,8 +28,8 @@
     const inputDetail = document.querySelector('.notes-details__input-detail'); //поле ввода новой записи в заметке
 
     let selectedColor; // выбранный на текущий момент цвет (из списка цветных кругов во всплывающем окне)
-    let currentNoteId = 0; // Id текущей заметки, отображаемой на главном экране и выделенной в боковом меню. По умолчанию вызывается заметка Tutorial
-    let currentNoteDetails; // текущая
+    let currentNoteId; // Id текущей заметки, отображаемой на главном экране и выделенной в боковом меню
+    let currentNoteDetails; // массив с записями текущей заметки, отображаемый на экране
 
     //в этом массиве хранится объекты с информацией о заметках
     let noteList = {
@@ -257,7 +257,7 @@
         })
         createNotes(notes)
         createNotesDetailsPage(notes) //исправить здесь.
-        inputTitle.value = ''; //сброс информации после добавления заметки
+        inputTitle.value = ''; //сброс в  после добавления заметки
         toggleTitleEditVisibility()
     }
 
